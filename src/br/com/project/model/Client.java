@@ -17,22 +17,6 @@ public class Client {
     private String complement;
     private String uf;
 
-    public Client(int id, String name, String rg, String cpf, String email, String cell, String telephone, String cep, String city, String address, int number, String neighborhood, String complement, String uf) {
-        this.id = id;
-        this.name = name;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.email = email;
-        this.cell = cell;
-        this.telephone = telephone;
-        this.cep = cep;
-        this.city = city;
-        this.address = address;
-        this.number = number;
-        this.neighborhood = neighborhood;
-        this.complement = complement;
-        this.uf = uf;
-    }
 
     public int getId() {
         return id;
