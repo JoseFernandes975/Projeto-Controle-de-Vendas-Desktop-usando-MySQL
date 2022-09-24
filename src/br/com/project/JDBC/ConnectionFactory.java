@@ -9,7 +9,7 @@ import java.util.Properties;
 public class ConnectionFactory {
     private static Connection conn;
     
-    public Connection getConnection(){
+    public static Connection getConnection(){
    if(conn == null) {
 			try {
 			Properties props = loadProperties();
