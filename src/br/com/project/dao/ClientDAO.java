@@ -51,11 +51,62 @@ public class ClientDAO {
         }
    }
    
+   public void updateClient(Client client){
+       PreparedStatement st = null;
+       try{
+           st = conn.prepareStatement(
+             "UPDATE tb_clientes SET "
+            + "Nome = ?, RG = ?, CPF = ?, Email = ? , Telefone = ?, Celular = ?,"
+            + " CEP = ?, Endereco = ?, Numero = ?, Complemento = ?,"
+            + " Bairro = ?, Cidade = ?, Estado = ? WHERE Id = ?");
+            
+           st.setString(1, client.getName());
+           st.setString(2, client.getRg());
+           st.setString(3,client.getCpf());
+              st.setString(4,client.getEmail());
+              st.setString(5,client.getTelephone());
+              st.setString(6,client.getCell());
+              st.setString(7,client.getCep());
+              st.setString(8,client.getAddress());
+              st.setInt(9,client.getNumber());
+              st.setString(10,client.getComplement());
+              st.setString(11,client.getNeighborhood());
+              st.setString(12,client.getCity());
+              st.setString(13,client.getUf());
+              st.setInt(14, client.getId());
+              
+              st.executeUpdate();
+              st.close(); 
+              
+              JOptionPane.showMessageDialog(null, "Update Completed!");
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Error Update!"+e.getMessage());
+       }
+   }
+
+   public void deleteByIdClient(Client client){
+       PreparedStatement st = null;
+       try{
+              st = conn.prepareStatement("Delete From tb_clientes Where Id = ?");
+              
+              st.setInt(1, client.getId());
+              
+              st.executeUpdate();
+              st.close();
+              JOptionPane.showMessageDialog(null, "Deleted completed!");
+       }
+       catch(SQLException e){
+         JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
+       }
+   }
+
    public List<Client> findAllClients(){
        List<Client> list = new ArrayList<>();
-       try{
+      
            ResultSet rs = null;
-           PreparedStatement st = conn.prepareStatement("SELECT * FROM tb_clientes");
+           PreparedStatement st = null;
+          try {
+            st = conn.prepareStatement("SELECT * FROM tb_clientes");
            
            rs = st.executeQuery();
            
@@ -78,12 +129,11 @@ public class ClientDAO {
               
               list.add(obj);
            }
-           return list;
-           
+          return list;
+             
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, "Error find All: "+e.getMessage());
-           return null;
        }
-       
+       return list;
    }
 }
