@@ -136,4 +136,43 @@ public class ClientDAO {
        }
        return list;
    }
+   
+    public List<Client> findClientByName(String name){
+        List<Client> list = new ArrayList<>();
+        
+        ResultSet rs = null;
+        PreparedStatement st = null;
+     try{
+         st = conn.prepareStatement("SELECT * FROM tb_clientes WHERE Nome like ?");
+         
+         st.setString(1, name);
+         
+         rs = st.executeQuery();
+         
+        while(rs.next()){
+              Client obj = new Client();
+              obj.setId(rs.getInt("Id"));
+              obj.setName(rs.getString("Nome"));
+              obj.setRg(rs.getString("RG"));
+              obj.setCpf(rs.getString("CPF"));
+              obj.setEmail(rs.getString("Email"));
+              obj.setTelephone(rs.getString("Telefone"));
+              obj.setCell(rs.getString("Celular"));
+              obj.setCep(rs.getString("CEP"));
+              obj.setAddress(rs.getString("Endereco"));
+              obj.setNumber(rs.getInt("Numero"));
+              obj.setComplement(rs.getString("Complemento"));
+              obj.setNeighborhood(rs.getString("Bairro"));
+              obj.setCity(rs.getString("Cidade"));
+              obj.setUf(rs.getString("Estado"));
+              
+              list.add(obj);
+     }
+        return list;
+     
+   }catch(SQLException e){
+       JOptionPane.showMessageDialog(null, "Not found name: "+e.getMessage());
+   }
+   return list;  
+   }
 }

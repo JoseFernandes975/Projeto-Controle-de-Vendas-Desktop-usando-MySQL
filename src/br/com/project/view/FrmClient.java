@@ -83,8 +83,8 @@ public class FrmClient extends javax.swing.JFrame {
         txtRg = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        btnSearchName = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableClient = new javax.swing.JTable();
         btNew = new javax.swing.JButton();
@@ -380,10 +380,20 @@ public class FrmClient extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Nome:");
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Pesquisar");
+        btnSearchName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSearchName.setText("Pesquisar");
+        btnSearchName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchNameActionPerformed(evt);
+            }
+        });
 
         tableClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -411,9 +421,9 @@ public class FrmClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnSearchName)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
@@ -425,8 +435,8 @@ public class FrmClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -637,6 +647,68 @@ public class FrmClient extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
          findAll();
     }//GEN-LAST:event_formWindowActivated
+
+    private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
+       try{
+        String name = "%"+txtSearch.getText()+"%";
+       
+       ClientDAO dao = new ClientDAO();
+       List<Client> list = dao.findClientByName(name);
+       DefaultTableModel dfd = (DefaultTableModel) tableClient.getModel();
+       dfd.setRowCount(0);
+               
+               for(Client c:list){
+             dfd.addRow(new Object[]{
+                 c.getId(),
+                 c.getName(),
+                 c.getRg(),
+                 c.getCpf(),
+                 c.getEmail(),
+                 c.getTelephone(),
+                 c.getCell(),
+                 c.getCep(),
+                 c.getCity(),
+                 c.getAddress(),
+                 c.getNeighborhood(),
+                 c.getNumber(),
+                 c.getComplement(),
+                 c.getUf()    
+         });
+         }
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
+       }
+      
+    }//GEN-LAST:event_btnSearchNameActionPerformed
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        String name = "%"+txtSearch.getText()+"%";
+       
+       ClientDAO dao = new ClientDAO();
+       List<Client> list = dao.findClientByName(name);
+       DefaultTableModel dfd = (DefaultTableModel) tableClient.getModel();
+       dfd.setRowCount(0);
+               
+               for(Client c:list){
+             dfd.addRow(new Object[]{
+                 c.getId(),
+                 c.getName(),
+                 c.getRg(),
+                 c.getCpf(),
+                 c.getEmail(),
+                 c.getTelephone(),
+                 c.getCell(),
+                 c.getCep(),
+                 c.getCity(),
+                 c.getAddress(),
+                 c.getNeighborhood(),
+                 c.getNumber(),
+                 c.getComplement(),
+                 c.getUf()    
+         });
+         }
+        
+    }//GEN-LAST:event_txtSearchKeyPressed
    
     /**
      * @param args the command line arguments
@@ -677,9 +749,9 @@ public class FrmClient extends javax.swing.JFrame {
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
     private javax.swing.JButton btNew;
+    private javax.swing.JButton btnSearchName;
     private javax.swing.JButton bttSave;
     private javax.swing.JComboBox<String> cbxUf;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -700,7 +772,6 @@ public class FrmClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField5;
     private java.awt.Label label1;
     private javax.swing.JTable tableClient;
     private javax.swing.JTextField txtAddress;
@@ -715,6 +786,7 @@ public class FrmClient extends javax.swing.JFrame {
     private javax.swing.JTextField txtNeighBorhood;
     private javax.swing.JTextField txtNumber;
     private javax.swing.JFormattedTextField txtRg;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JFormattedTextField txtTelephone;
     // End of variables declaration//GEN-END:variables
 
