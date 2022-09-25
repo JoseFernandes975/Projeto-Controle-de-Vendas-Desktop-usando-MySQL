@@ -11,7 +11,6 @@ public class FrmClient extends javax.swing.JFrame {
 
     public FrmClient() {
         initComponents();
-        findAll();
     }
     
     public void findAll(){
@@ -19,6 +18,7 @@ public class FrmClient extends javax.swing.JFrame {
         ClientDAO dao = new ClientDAO();
          List<Client> list = dao.findAllClients();
          DefaultTableModel dados = (DefaultTableModel) tableClient.getModel();
+         dados.setNumRows(0);
        
          
          for(Client c:list){
@@ -89,10 +89,15 @@ public class FrmClient extends javax.swing.JFrame {
         tableClient = new javax.swing.JTable();
         btNew = new javax.swing.JButton();
         btEdit = new javax.swing.JButton();
-        btSave = new javax.swing.JButton();
+        bttSave = new javax.swing.JButton();
         btDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 204));
 
@@ -391,6 +396,11 @@ public class FrmClient extends javax.swing.JFrame {
                 "Código", "Nome", "RG", "CPF", "E-mail", "Celular", "Telefone", "CEP", "Cidade", "Endereco", "Bairro", "Nº", "Comp", "UF"
             }
         ));
+        tableClient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClientMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableClient);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -438,10 +448,10 @@ public class FrmClient extends javax.swing.JFrame {
             }
         });
 
-        btSave.setText("SALVAR");
-        btSave.addActionListener(new java.awt.event.ActionListener() {
+        bttSave.setText("SALVAR");
+        bttSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSaveActionPerformed(evt);
+                bttSaveActionPerformed(evt);
             }
         });
 
@@ -466,7 +476,7 @@ public class FrmClient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btEdit)
                 .addGap(18, 18, 18)
-                .addComponent(btSave)
+                .addComponent(bttSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btDelete)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -481,7 +491,7 @@ public class FrmClient extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNew, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 65, Short.MAX_VALUE))
         );
@@ -526,10 +536,29 @@ public class FrmClient extends javax.swing.JFrame {
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-        // TODO add your handling code here:
+         Client obj =  new Client();
+            obj.setName(txtName.getText());
+            obj.setRg(txtRg.getText());
+            obj.setCpf(txtCpf.getText());
+            obj.setEmail(txtEmail.getText());
+            obj.setCell(txtCell.getText());
+            obj.setTelephone(txtTelephone.getText());
+            obj.setCep(txtCep.getText());
+            obj.setCity(txtCity.getText());
+            obj.setAddress(txtAddress.getText());
+            obj.setNeighborhood(txtNeighBorhood.getText());
+            obj.setComplement(txtComplement.getText());
+            obj.setNumber(Integer.parseInt(txtNumber.getText()));
+            obj.setUf(cbxUf.getSelectedItem().toString());
+            obj.setId(Integer.parseInt(txtCode.getText()));
+            
+            
+            ClientDAO objDao = new ClientDAO();
+            objDao.updateClient(obj);
+ 
     }//GEN-LAST:event_btEditActionPerformed
 
-    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+    private void bttSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSaveActionPerformed
 
             Client obj =  new Client();
             obj.setName(txtName.getText());
@@ -549,16 +578,65 @@ public class FrmClient extends javax.swing.JFrame {
             ClientDAO objDao = new ClientDAO();
             objDao.insertClient(obj);
  
-    }//GEN-LAST:event_btSaveActionPerformed
+    }//GEN-LAST:event_bttSaveActionPerformed
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-        // TODO add your handling code here:
+          Client obj =  new Client();
+            
+             obj.setId(Integer.parseInt(txtCode.getText()));
+             ClientDAO objDao = new ClientDAO();
+             objDao.deleteByIdClient(obj);
+    }                                      
+
+    private void bt(java.awt.event.ActionEvent evt) {                                       
+             Client obj =  new Client();
+            obj.setName(txtName.getText());
+            obj.setRg(txtRg.getText());
+            obj.setCpf(txtCpf.getText());
+            obj.setEmail(txtEmail.getText());
+            obj.setCell(txtCell.getText());
+            obj.setTelephone(txtTelephone.getText());
+            obj.setCep(txtCep.getText());
+            obj.setCity(txtCity.getText());
+            obj.setAddress(txtAddress.getText());
+            obj.setNeighborhood(txtNeighBorhood.getText());
+            obj.setComplement(txtComplement.getText());
+            obj.setNumber(Integer.parseInt(txtNumber.getText()));
+            obj.setUf(cbxUf.getSelectedItem().toString());
+           
+            
+            ClientDAO objDao = new ClientDAO();
+            objDao.insertClient(obj);
     }//GEN-LAST:event_btDeleteActionPerformed
 
     private void txtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCepActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_txtCepActionPerformed
+
+    private void tableClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientMouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+        
+        txtCode.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 0).toString());
+        txtName.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 1).toString());
+        txtRg.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 2).toString());
+        txtCpf.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 3).toString());
+        txtEmail.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 4).toString());
+        txtCell.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 5).toString());
+        txtTelephone.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 6).toString());
+        txtCep.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 7).toString());
+        txtCity.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 8).toString());
+        txtAddress.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 9).toString());
+        txtNeighBorhood.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 10).toString());
+        txtNumber.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 11).toString());
+        txtComplement.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 12).toString());
+        cbxUf.setSelectedItem(tableClient.getValueAt(tableClient.getSelectedRow(), 13).toString());
+        
+    }//GEN-LAST:event_tableClientMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         findAll();
+    }//GEN-LAST:event_formWindowActivated
    
     /**
      * @param args the command line arguments
@@ -599,7 +677,7 @@ public class FrmClient extends javax.swing.JFrame {
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
     private javax.swing.JButton btNew;
-    private javax.swing.JButton btSave;
+    private javax.swing.JButton bttSave;
     private javax.swing.JComboBox<String> cbxUf;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
