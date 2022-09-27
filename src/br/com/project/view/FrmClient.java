@@ -2,6 +2,7 @@ package br.com.project.view;
 
 import br.com.project.dao.ClientDAO;
 import br.com.project.model.Client;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -234,6 +235,11 @@ public class FrmClient extends javax.swing.JFrame {
         txtCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCepActionPerformed(evt);
+            }
+        });
+        txtCep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCepKeyPressed(evt);
             }
         });
 
@@ -751,6 +757,19 @@ public class FrmClient extends javax.swing.JFrame {
         cbxUf.setSelectedItem(obj.getAddress());
         
     }//GEN-LAST:event_bttSearchCpfActionPerformed
+ 
+    private void txtCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyPressed
+      if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+         Client obj =  new Client();
+         ClientDAO dao = new ClientDAO();
+         obj = dao.buscaCep(txtCep.getText());
+         
+         txtAddress.setText(obj.getAddress());
+         txtNeighBorhood.setText(obj.getNeighborhood());
+         txtCity.setText(obj.getCity());
+        cbxUf.setSelectedItem(obj.getUf());               
+     }
+    }//GEN-LAST:event_txtCepKeyPressed
    
     /**
      * @param args the command line arguments
