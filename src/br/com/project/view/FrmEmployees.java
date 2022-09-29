@@ -12,6 +12,8 @@ import javax.swing.table.TableModel;
 
 public class FrmEmployees extends javax.swing.JFrame {
 
+    private Object txtNameSearch;
+
     public FrmEmployees() {
         initComponents();
     }
@@ -62,7 +64,7 @@ public class FrmEmployees extends javax.swing.JFrame {
         panelData = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
+        txtName2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -94,12 +96,13 @@ public class FrmEmployees extends javax.swing.JFrame {
         txtComplement = new javax.swing.JTextField();
         cbxAccessLevel = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
+        bttSearchname = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
         btnSearchName = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableEmployee = new javax.swing.JTable();
+        txtNameS = new javax.swing.JTextField();
         btNew = new javax.swing.JButton();
         btEditEmploy = new javax.swing.JButton();
         bttSaveEmploy = new javax.swing.JButton();
@@ -154,9 +157,14 @@ public class FrmEmployees extends javax.swing.JFrame {
             }
         });
 
-        txtName.addActionListener(new java.awt.event.ActionListener() {
+        txtName2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
+                txtName2ActionPerformed(evt);
+            }
+        });
+        txtName2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtName2KeyPressed(evt);
             }
         });
 
@@ -300,6 +308,18 @@ public class FrmEmployees extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel18.setText("Nível de Acesso:");
 
+        bttSearchname.setText("Pesquisar");
+        bttSearchname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttSearchnameActionPerformed(evt);
+            }
+        });
+        bttSearchname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bttSearchnameKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDataLayout = new javax.swing.GroupLayout(panelData);
         panelData.setLayout(panelDataLayout);
         panelDataLayout.setHorizontalGroup(
@@ -334,7 +354,9 @@ public class FrmEmployees extends javax.swing.JFrame {
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bttSearchname))
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,12 +384,9 @@ public class FrmEmployees extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelDataLayout.createSequentialGroup()
-                                .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelDataLayout.createSequentialGroup()
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDataLayout.createSequentialGroup()
@@ -378,7 +397,11 @@ public class FrmEmployees extends javax.swing.JFrame {
                                         .addComponent(jLabel13)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cbxUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtOffice, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(panelDataLayout.createSequentialGroup()
+                                        .addGap(69, 69, 69)
+                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtOffice, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
         panelDataLayout.setVerticalGroup(
@@ -391,7 +414,8 @@ public class FrmEmployees extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttSearchname, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -434,7 +458,7 @@ public class FrmEmployees extends javax.swing.JFrame {
                     .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados Pessoais", panelData);
@@ -443,13 +467,6 @@ public class FrmEmployees extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Nome:");
-
-        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
-        });
 
         btnSearchName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSearchName.setText("Pesquisar");
@@ -477,6 +494,17 @@ public class FrmEmployees extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableEmployee);
 
+        txtNameS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameSActionPerformed(evt);
+            }
+        });
+        txtNameS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNameSKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -485,8 +513,8 @@ public class FrmEmployees extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNameS, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSearchName)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -499,8 +527,8 @@ public class FrmEmployees extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchName))
+                    .addComponent(btnSearchName)
+                    .addComponent(txtNameS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -577,9 +605,9 @@ public class FrmEmployees extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodeActionPerformed
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    private void txtName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    }//GEN-LAST:event_txtName2ActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
@@ -611,7 +639,7 @@ public class FrmEmployees extends javax.swing.JFrame {
 
     private void btEditEmployActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditEmployActionPerformed
          Employees obj =  new Employees();
-            obj.setName(txtName.getText());
+            obj.setName(txtName2.getText());
             obj.setRg(txtRg.getText());
             obj.setCpf(txtCpf.getText());
             obj.setEmail(txtEmail.getText());
@@ -640,7 +668,7 @@ public class FrmEmployees extends javax.swing.JFrame {
     private void bttSaveEmployActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSaveEmployActionPerformed
 
             Employees obj =  new Employees();
-            obj.setName(txtName.getText());
+            obj.setName(txtName2.getText());
             obj.setRg(txtRg.getText());
             obj.setCpf(txtCpf.getText());
             obj.setEmail(txtEmail.getText());
@@ -676,7 +704,7 @@ public class FrmEmployees extends javax.swing.JFrame {
 
     private void bt(java.awt.event.ActionEvent evt) {                                       
              Client obj =  new Client();
-            obj.setName(txtName.getText());
+            obj.setName(txtName2.getText());
             obj.setRg(txtRg.getText());
             obj.setCpf(txtCpf.getText());
             obj.setEmail(txtEmail.getText());
@@ -704,7 +732,7 @@ public class FrmEmployees extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(0);
         
         txtCode.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 0).toString());
-        txtName.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 1).toString());
+        txtName2.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 1).toString());
         txtRg.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 2).toString());
         txtCpf.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 3).toString());
         txtEmail.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 4).toString());
@@ -728,21 +756,24 @@ public class FrmEmployees extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
-       try{
-        String name = "%"+txtSearch.getText()+"%";
+      
+        String name = "%"+txtNameS.getText()+"%";
        
-       ClientDAO dao = new ClientDAO();
-       List<Client> list = dao.findClientByName(name);
+       EmployeeDAO dao = new EmployeeDAO();
+       List<Employees> list = dao.findEmployeesByName(name);
        DefaultTableModel dfd = (DefaultTableModel) tableEmployee.getModel();
        dfd.setRowCount(0);
                
-               for(Client c:list){
+               for(Employees c:list){
              dfd.addRow(new Object[]{
                  c.getId(),
                  c.getName(),
                  c.getRg(),
                  c.getCpf(),
                  c.getEmail(),
+                 c.getPassword(),
+                 c.getOffice(),
+                 c.getAccessLevel(),
                  c.getTelephone(),
                  c.getCell(),
                  c.getCep(),
@@ -754,50 +785,18 @@ public class FrmEmployees extends javax.swing.JFrame {
                  c.getUf()    
          });
          }
-       }catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
-       }
       
     }//GEN-LAST:event_btnSearchNameActionPerformed
 
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        String name = "%"+txtSearch.getText()+"%";
-       
-       ClientDAO dao = new ClientDAO();
-       List<Client> list = dao.findClientByName(name);
-       DefaultTableModel dfd = (DefaultTableModel) tableEmployee.getModel();
-       dfd.setRowCount(0);
-               
-               for(Client c:list){
-             dfd.addRow(new Object[]{
-                 c.getId(),
-                 c.getName(),
-                 c.getRg(),
-                 c.getCpf(),
-                 c.getEmail(),
-                 c.getTelephone(),
-                 c.getCell(),
-                 c.getCep(),
-                 c.getCity(),
-                 c.getAddress(),
-                 c.getNeighborhood(),
-                 c.getNumber(),
-                 c.getComplement(),
-                 c.getUf()    
-         });
-         }
-        
-    }//GEN-LAST:event_txtSearchKeyPressed
-
     private void bttSearchCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchCpfActionPerformed
-        Client obj = new Client();
+      /*  Client obj = new Client();
         ClientDAO dao = new ClientDAO();
         String cpf = txtCpf.getText();
         
         obj = dao.findByCpf(cpf);
         
         txtCode.setText(String.valueOf(obj.getId()));
-        txtName.setText(obj.getName());
+        txtNamee.setText(obj.getName());
         txtRg.setText(obj.getRg());
         txtCpf.setText(obj.getCpf());
         txtEmail.setText(obj.getEmail());
@@ -810,25 +809,95 @@ public class FrmEmployees extends javax.swing.JFrame {
         txtNeighBorhood.setText(obj.getNeighborhood());
         txtCity.setText(obj.getCity());
         cbxUf.setSelectedItem(obj.getAddress());
-        
+   */     
     }//GEN-LAST:event_bttSearchCpfActionPerformed
  
     private void txtCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyPressed
-      if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+   /*   if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
          Employees obj =  new Employees();
          EmployeeDAO dao = new EmployeeDAO();
-       //  obj = dao.buscaCep(txtCep.getText());
+         obj = dao.buscaCep(txtCep.getText());
          
          txtAddress.setText(obj.getAddress());
          txtNeighBorhood.setText(obj.getNeighborhood());
          txtCity.setText(obj.getCity());
         cbxUf.setSelectedItem(obj.getUf());               
-     }
+      }
+        */
     }//GEN-LAST:event_txtCepKeyPressed
 
     private void txtComplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComplementActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtComplementActionPerformed
+
+    private void bttSearchnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchnameActionPerformed
+
+     String nome = txtName2.getText();
+     Employees employ = new Employees();
+     EmployeeDAO dao = new EmployeeDAO();
+     
+     employ = dao.findEmployeeByName(nome);
+     
+      if(employ.getName() != null){
+        txtCode.setText(String.valueOf(employ.getId()));
+        txtName2.setText(employ.getName());
+        txtRg.setText(employ.getRg());
+        txtCpf.setText(employ.getCpf());
+        txtEmail.setText(employ.getEmail());
+        txtPassword.setText(employ.getPassword());
+        txtOffice.setText(employ.getOffice());
+        cbxAccessLevel.setSelectedItem(employ.getAccessLevel());
+        txtTelephone.setText(employ.getTelephone());
+        txtCell.setText(employ.getCell());
+        txtCep.setText(employ.getCep());
+        txtAddress.setText(employ.getAddress());
+        txtNumber.setText(String.valueOf(employ.getNumber()));
+        txtComplement.setText(employ.getComplement());
+        txtNeighBorhood.setText(employ.getNeighborhood());
+        txtCity.setText(employ.getCity());
+        cbxUf.setSelectedItem(employ.getAddress());
+      }
+    }//GEN-LAST:event_bttSearchnameActionPerformed
+
+    private void bttSearchnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bttSearchnameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bttSearchnameKeyPressed
+
+    private void txtNameSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameSKeyPressed
+     String nome = txtNameS.getText();
+     Employees employ = new Employees();
+     EmployeeDAO dao = new EmployeeDAO();
+     
+     employ = dao.findEmployeeByName(nome);
+     
+      if(employ.getName()!= null){
+        txtCode.setText(String.valueOf(employ.getId()));
+        txtName2.setText(employ.getName());
+        txtRg.setText(employ.getRg());
+        txtCpf.setText(employ.getCpf());
+        txtEmail.setText(employ.getEmail());
+        txtPassword.setText(employ.getPassword());
+        txtOffice.setText(employ.getOffice());
+        cbxAccessLevel.setSelectedItem(employ.getAccessLevel());
+        txtTelephone.setText(employ.getTelephone());
+        txtCell.setText(employ.getCell());
+        txtCep.setText(employ.getCep());
+        txtAddress.setText(employ.getAddress());
+        txtNumber.setText(String.valueOf(employ.getNumber()));
+        txtComplement.setText(employ.getComplement());
+        txtNeighBorhood.setText(employ.getNeighborhood());
+        txtCity.setText(employ.getCity());
+        cbxUf.setSelectedItem(employ.getAddress());
+      }
+    }//GEN-LAST:event_txtNameSKeyPressed
+
+    private void txtNameSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameSActionPerformed
+
+    private void txtName2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtName2KeyPressed
+       
+    }//GEN-LAST:event_txtName2KeyPressed
    
     /**
      * @param args the command line arguments
@@ -873,6 +942,7 @@ public class FrmEmployees extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchName;
     private javax.swing.JButton bttSaveEmploy;
     private javax.swing.JButton bttSearchCpf;
+    private javax.swing.JButton bttSearchname;
     private javax.swing.JComboBox<String> cbxAccessLevel;
     private javax.swing.JComboBox<String> cbxUf;
     private javax.swing.JLabel jLabel1;
@@ -908,13 +978,13 @@ public class FrmEmployees extends javax.swing.JFrame {
     private javax.swing.JTextField txtComplement;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtName2;
+    private javax.swing.JTextField txtNameS;
     private javax.swing.JTextField txtNeighBorhood;
     private javax.swing.JTextField txtNumber;
     private javax.swing.JTextField txtOffice;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JFormattedTextField txtRg;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JFormattedTextField txtTelephone;
     // End of variables declaration//GEN-END:variables
 

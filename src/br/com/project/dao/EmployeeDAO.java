@@ -3,6 +3,7 @@ package br.com.project.dao;
 
 import br.com.project.JDBC.ConnectionFactory;
 import br.com.project.model.Employees;
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException; 
@@ -143,6 +144,85 @@ public class EmployeeDAO {
             JOptionPane.showMessageDialog(null, "Error findALL: "+e.getMessage());
             return null;
         }
-    }     
+    }
+    
+    
+    public Employees findEmployeeByName(String name){
+        PreparedStatement st = null;
+        Employees employ = new Employees();
+        try{
+            st = conn.prepareStatement("SELECT * FROM tb_funcionarios WHERE Nome = ?");
+            
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+            
+            while(rs.next()){
+                employ.setName(rs.getString("Nome"));
+                employ.setRg(rs.getString("RG"));
+                employ.setCpf(rs.getString("CPF"));
+                employ.setEmail(rs.getString("Email"));
+                employ.setPassword(rs.getString("Senha"));
+                employ.setOffice(rs.getString("Cargo"));
+                employ.setAccessLevel(rs.getString("Nivel_acesso"));
+                employ.setTelephone(rs.getString("Telefone"));
+                employ.setCell(rs.getString("Celular"));
+                employ.setCep(rs.getString("CEP"));
+                employ.setAddress(rs.getString("Endereco"));
+                employ.setNumber(rs.getInt("Numero"));
+                employ.setComplement(rs.getString("Complemento"));
+                employ.setNeighborhood(rs.getString("Bairro"));
+                employ.setCity(rs.getString("Cidade"));
+                employ.setUf(rs.getString("Estado"));
+          
+            }
+                return employ;  
+           
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error in find employee: "+e.getMessage());
+        }
+        return employ;
+    }
  
+    
+    
+    public List<Employees> findEmployeesByName(String name){
+        PreparedStatement st = null;
+        List<Employees> list = new ArrayList<>();
+         ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("SELECT * FROM tb_funcionarios WHERE Nome like ?");
+            
+            st.setString(1, name);
+             rs = st.executeQuery();
+            
+            while(rs.next()){
+                 Employees employ = new Employees();
+                 
+                employ.setName(rs.getString("Nome"));
+                employ.setRg(rs.getString("RG"));
+                employ.setCpf(rs.getString("CPF"));
+                employ.setEmail(rs.getString("Email"));
+                employ.setPassword(rs.getString("Senha"));
+                employ.setOffice(rs.getString("Cargo"));
+                employ.setAccessLevel(rs.getString("Nivel_acesso"));
+                employ.setTelephone(rs.getString("Telefone"));
+                employ.setCell(rs.getString("Celular"));
+                employ.setCep(rs.getString("CEP"));
+                employ.setAddress(rs.getString("Endereco"));
+                employ.setNumber(rs.getInt("Numero"));
+                employ.setComplement(rs.getString("Complemento"));
+                employ.setNeighborhood(rs.getString("Bairro"));
+                employ.setCity(rs.getString("Cidade"));
+                employ.setUf(rs.getString("Estado"));
+          
+                list.add(employ);
+                
+            }
+                return list;  
+           
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error in find employee: "+e.getMessage());
+        }
+        return list;
+    }
 }
