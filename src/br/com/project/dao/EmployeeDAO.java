@@ -3,6 +3,7 @@ package br.com.project.dao;
 
 import br.com.project.JDBC.ConnectionFactory;
 import br.com.project.model.Employees;
+import br.com.project.view.FrmMenu;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -119,7 +120,7 @@ public class EmployeeDAO {
             List<Employees> list = new ArrayList<>();            
             while(rs.next()){
                 Employees employ = new Employees();
-                employ.setId(rs.getInt("Id"));
+                
               employ.setName(rs.getString("Nome"));
               employ.setRg(rs.getString("RG"));
               employ.setCpf(rs.getString("CPF"));
@@ -136,6 +137,7 @@ public class EmployeeDAO {
               employ.setNeighborhood(rs.getString("Bairro"));
               employ.setCity(rs.getString("Cidade"));
               employ.setUf(rs.getString("Estado"));
+              employ.setId(rs.getInt("Id"));
               
               list.add(employ);
             }
@@ -157,6 +159,7 @@ public class EmployeeDAO {
             ResultSet rs = st.executeQuery();
             
             while(rs.next()){
+                
                 employ.setName(rs.getString("Nome"));
                 employ.setRg(rs.getString("RG"));
                 employ.setCpf(rs.getString("CPF"));
@@ -173,6 +176,7 @@ public class EmployeeDAO {
                 employ.setNeighborhood(rs.getString("Bairro"));
                 employ.setCity(rs.getString("Cidade"));
                 employ.setUf(rs.getString("Estado"));
+                employ.setId(rs.getInt("Id"));
           
             }
                 return employ;  
@@ -214,6 +218,7 @@ public class EmployeeDAO {
                 employ.setNeighborhood(rs.getString("Bairro"));
                 employ.setCity(rs.getString("Cidade"));
                 employ.setUf(rs.getString("Estado"));
+                employ.setId(rs.getInt("Id"));
           
                 list.add(employ);
                 
@@ -225,4 +230,30 @@ public class EmployeeDAO {
         }
         return list;
     }
+    
+    public void login(String email, String senha){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("SELECT * FROM tb_funcionarios WHERE Email = ? AND Senha = ?");
+            
+            st.setString(1, email);
+            st.setString(2, senha);
+            
+            rs = st.executeQuery();
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Sistema");
+                FrmMenu tela = new FrmMenu();
+                tela.setVisible(true);
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Dados incorretos!");
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error :"+e.getMessage());
+        }
+    }
+    
 }

@@ -684,6 +684,7 @@ public class FrmEmployees extends javax.swing.JFrame {
             obj.setComplement(txtOffice.getText());
             obj.setNumber(Integer.parseInt(txtNumber.getText()));
             obj.setUf(cbxUf.getSelectedItem().toString());
+            obj.setId(Integer.parseInt(txtCode.getText()));
             
             EmployeeDAO objDao = new EmployeeDAO();
             objDao.insertEmployee(obj);
@@ -888,6 +889,7 @@ public class FrmEmployees extends javax.swing.JFrame {
         txtNeighBorhood.setText(employ.getNeighborhood());
         txtCity.setText(employ.getCity());
         cbxUf.setSelectedItem(employ.getAddress());
+        
       }
     }//GEN-LAST:event_txtNameSKeyPressed
 
