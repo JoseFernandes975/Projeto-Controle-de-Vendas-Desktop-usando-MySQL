@@ -4,15 +4,14 @@
  */
 package br.com.project.view;
 
-/**
- *
- * @author Bilad
- */
-public class FrmMenu extends javax.swing.JFrame {
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
-    /**
-     * Creates new form FrmMenu
-     */
+
+public class FrmMenu extends javax.swing.JFrame {
+public String userConnected;
+
     public FrmMenu() {
         initComponents();
     }
@@ -26,6 +25,16 @@ public class FrmMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/fundo.jpg"));
+        Image image = icon.getImage();
+        paineDesktop = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image, 0,0,getWidth(),getHeight(),this);
+            }
+        };
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        labelUserConn = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -42,7 +51,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -50,6 +59,49 @@ public class FrmMenu extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+
+        paineDesktop.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setText("Usuário conectado:");
+
+        labelUserConn.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
+        labelUserConn.setForeground(new java.awt.Color(51, 153, 255));
+        labelUserConn.setText("José Henrique Fernandes");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelUserConn, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(904, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(labelUserConn)))
+        );
+
+        paineDesktop.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout paineDesktopLayout = new javax.swing.GroupLayout(paineDesktop);
+        paineDesktop.setLayout(paineDesktopLayout);
+        paineDesktopLayout.setHorizontalGroup(
+            paineDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        paineDesktopLayout.setVerticalGroup(
+            paineDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paineDesktopLayout.createSequentialGroup()
+                .addGap(0, 478, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jMenu1.setBackground(new java.awt.Color(51, 0, 51));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-pessoa-alta-48 (1).png"))); // NOI18N
@@ -70,6 +122,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/funcionarios.png"))); // NOI18N
         jMenu2.setText("Funcionários");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2620530_check_employee_job_seeker_unemployee_icon.png"))); // NOI18N
         jMenuItem1.setText("Controle de Funcionários");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +136,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fornecedores.png"))); // NOI18N
         jMenu3.setText("Fornecedores");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/103428_buy_icon.png"))); // NOI18N
         jMenuItem3.setText("Controle de Fornecedores");
         jMenu3.add(jMenuItem3);
 
@@ -91,9 +145,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/produtos.png"))); // NOI18N
         jMenu6.setText("Produtos");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/49590_boxes_customers_inventory_products_icon.png"))); // NOI18N
         jMenuItem5.setText("Controle de Estoque");
         jMenu6.add(jMenuItem5);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/3018582_buy_cart_checkout_products_purchase_icon.png"))); // NOI18N
         jMenuItem6.setText("Consulta de Produtos");
         jMenu6.add(jMenuItem6);
 
@@ -102,12 +158,15 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vendas.png"))); // NOI18N
         jMenu4.setText("Vendas");
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/352573_in_new_open_icon (1).png"))); // NOI18N
         jMenuItem8.setText("Abrir PDV");
         jMenu4.add(jMenuItem8);
 
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2682848_day_forecast_sun_sunny_weather_icon.png"))); // NOI18N
         jMenuItem9.setText("Posição do Dia");
         jMenu4.add(jMenuItem9);
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4781832_ago_clock_history_report_statistics_icon.png"))); // NOI18N
         jMenuItem10.setText("Histórico de Vendas");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +180,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/configuracoes.png"))); // NOI18N
         jMenu5.setText("Configurações");
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2528067_avatars_groups_male_person_teamwork_icon (1).png"))); // NOI18N
         jMenuItem7.setText("Troca de Usuários");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,9 +191,9 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sair.png"))); // NOI18N
-        jMenu7.setText("Sair");
-        jMenuBar1.add(jMenu7);
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4265055_door_exit_get_log_out_icon (1).png"))); // NOI18N
+        jMenu8.setText("Sair");
+        jMenuBar1.add(jMenu8);
 
         setJMenuBar(jMenuBar1);
 
@@ -141,11 +201,11 @@ public class FrmMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 886, Short.MAX_VALUE)
+            .addComponent(paineDesktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 301, Short.MAX_VALUE)
+            .addComponent(paineDesktop)
         );
 
         pack();
@@ -169,7 +229,9 @@ public class FrmMenu extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        this.setExtendedState(this.MAXIMIZED_BOTH);
+       labelUserConn.setText(userConnected);
        this.setVisible(true);
+       
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -208,13 +270,14 @@ public class FrmMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -225,5 +288,8 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelUserConn;
+    private javax.swing.JDesktopPane paineDesktop;
     // End of variables declaration//GEN-END:variables
 }

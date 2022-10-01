@@ -246,6 +246,7 @@ public class EmployeeDAO {
                 JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Sistema");
                 FrmMenu tela = new FrmMenu();
                 tela.setVisible(true);
+                tela.userConnected = rs.getString("Nome");
                 
             }
             else{
