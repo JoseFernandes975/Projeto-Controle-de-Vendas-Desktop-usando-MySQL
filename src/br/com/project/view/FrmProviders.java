@@ -547,7 +547,7 @@ public class FrmProviders extends javax.swing.JFrame {
     }//GEN-LAST:event_btNewPActionPerformed
 
     private void btEditPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditPActionPerformed
-     /*    Providers obj =  new Providers();
+         Providers obj =  new Providers();
             obj.setName(txtNameP.getText());
             obj.setCnpg(txtCnpj.getText());
             obj.setEmail(txtEmailP.getText());
@@ -564,10 +564,10 @@ public class FrmProviders extends javax.swing.JFrame {
             
             
             ProviderDAO objDao = new ProviderDAO();
-            objDao.updateClient(obj);
+            objDao.updateProvider(obj);
             
             new br.com.project.util.Util().cleanPane(panelData);
- */
+
     }//GEN-LAST:event_btEditPActionPerformed
 
     private void bttSavePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSavePActionPerformed
@@ -594,11 +594,11 @@ public class FrmProviders extends javax.swing.JFrame {
     }//GEN-LAST:event_bttSavePActionPerformed
 
     private void btDeletePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeletePActionPerformed
-          Client obj =  new Client();
+          Providers obj =  new Providers();
             
              obj.setId(Integer.parseInt(txtCodeP.getText()));
-             ClientDAO objDao = new ClientDAO();
-             objDao.deleteByIdClient(obj);
+             ProviderDAO objDao = new ProviderDAO();
+             objDao.deleteProvider(obj);
              
              new br.com.project.util.Util().cleanPane(panelData);
     }                                      
