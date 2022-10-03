@@ -1,7 +1,7 @@
 package projectdatabase;
 
 import br.com.project.JDBC.ConnectionFactory;
-import br.com.project.view.FrmClient;
+import br.com.project.view.FrmProviders;
 import javax.swing.JOptionPane;
 
 public class Application {
