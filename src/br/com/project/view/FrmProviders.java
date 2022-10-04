@@ -17,31 +17,30 @@ public class FrmProviders extends javax.swing.JFrame {
     }
     
     public void findAll(){
-        try{
-        ClientDAO dao = new ClientDAO();
-         List<Client> list = dao.findAllClients();
-         DefaultTableModel dados = (DefaultTableModel) tableClient.getModel();
-         dados.setNumRows(0);
-       
-         
-         for(Client c:list){
-             dados.addRow(new Object[]{
-                 c.getId(),
-                 c.getName(),
-                 c.getRg(),
-                 c.getCpf(),
-                 c.getEmail(),
-                 c.getTelephone(),
-                 c.getCell(),
-                 c.getCep(),
-                 c.getCity(),
-                 c.getAddress(),
-                 c.getNeighborhood(),
-                 c.getNumber(),
-                 c.getComplement(),
-                 c.getUf()    
-         });
-         }
+       try{
+           ProviderDAO pd = new ProviderDAO();
+           List<Providers> list = pd.findAllProvider();
+           DefaultTableModel dtm = (DefaultTableModel) tableProvider.getModel();
+           dtm.setNumRows(0);
+           
+           for(Providers p: list){
+               dtm.addRow(new Object[]{
+                 p.getId(),
+                 p.getName(),
+                 p.getCnpj(),
+                 p.getEmail(),
+                 p.getTelephone(),
+                 p.getCell(),
+                 p.getCep(),
+                 p.getCity(),
+                 p.getAddress(),
+                 p.getNeighborhood(),
+                 p.getNumber(),
+                 p.getComplement(),
+                 p.getUf()    
+               });
+           }
+    
 }catch(Exception e){
    e.printStackTrace();
     }
@@ -82,13 +81,13 @@ public class FrmProviders extends javax.swing.JFrame {
         cbxUfP = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         txtCnpj = new javax.swing.JFormattedTextField();
-        bttSearchCpf = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearchName = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableClient = new javax.swing.JTable();
+        tableProvider = new javax.swing.JTable();
         btNewP = new javax.swing.JButton();
         btEditP = new javax.swing.JButton();
         bttSaveP = new javax.swing.JButton();
@@ -256,10 +255,10 @@ public class FrmProviders extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        bttSearchCpf.setText("Pesquisar");
-        bttSearchCpf.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttSearchCpfActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -277,7 +276,9 @@ public class FrmProviders extends javax.swing.JFrame {
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNameP, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNameP, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,42 +292,41 @@ public class FrmProviders extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTelephoneP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDataLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCepP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddressP, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNumberP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDataLayout.createSequentialGroup()
-                        .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNeighBorhoodP, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelDataLayout.createSequentialGroup()
-                                .addGap(216, 216, 216)
-                                .addComponent(bttSearchCpf))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDataLayout.createSequentialGroup()
-                                .addGap(97, 97, 97)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCepP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4))
+                            .addGroup(panelDataLayout.createSequentialGroup()
+                                .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNeighBorhoodP, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDataLayout.createSequentialGroup()
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCityP, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(82, 82, 82)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtComplementP, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxUfP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cbxUfP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDataLayout.createSequentialGroup()
+                                .addComponent(txtAddressP, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumberP, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         panelDataLayout.setVerticalGroup(
@@ -339,7 +339,8 @@ public class FrmProviders extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNameP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNameP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -369,8 +370,7 @@ public class FrmProviders extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bttSearchCpf))
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
@@ -382,6 +382,11 @@ public class FrmProviders extends javax.swing.JFrame {
         jLabel15.setText("Nome:");
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
@@ -396,7 +401,7 @@ public class FrmProviders extends javax.swing.JFrame {
             }
         });
 
-        tableClient.setModel(new javax.swing.table.DefaultTableModel(
+        tableProvider.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -407,12 +412,17 @@ public class FrmProviders extends javax.swing.JFrame {
                 "Código", "Nome", "CNPJ", "E-mail", "Celular", "Telefone", "CEP", "Cidade", "Endereco", "Bairro", "Nº", "Comp", "UF"
             }
         ));
-        tableClient.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableProvider.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableClientMouseClicked(evt);
+                tableProviderMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableClient);
+        tableProvider.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableProviderKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableProvider);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -549,7 +559,7 @@ public class FrmProviders extends javax.swing.JFrame {
     private void btEditPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditPActionPerformed
          Providers obj =  new Providers();
             obj.setName(txtNameP.getText());
-            obj.setCnpg(txtCnpj.getText());
+            obj.setCnpj(txtCnpj.getText());
             obj.setEmail(txtEmailP.getText());
             obj.setCell(txtCellP.getText());
             obj.setTelephone(txtTelephoneP.getText());
@@ -574,7 +584,7 @@ public class FrmProviders extends javax.swing.JFrame {
 
              Providers obj =  new Providers();
             obj.setName(txtNameP.getText());
-            obj.setCnpg(txtCnpj.getText());
+            obj.setCnpj(txtCnpj.getText());
             obj.setEmail(txtEmailP.getText());
             obj.setCell(txtCellP.getText());
             obj.setTelephone(txtTelephoneP.getText());
@@ -606,7 +616,7 @@ public class FrmProviders extends javax.swing.JFrame {
     private void bt(java.awt.event.ActionEvent evt) {                                       
              Providers obj =  new Providers();
             obj.setName(txtNameP.getText());
-            obj.setCnpg(txtCnpj.getText());
+            obj.setCnpj(txtCnpj.getText());
             obj.setEmail(txtEmailP.getText());
             obj.setCell(txtCellP.getText());
             obj.setTelephone(txtTelephoneP.getText());
@@ -628,44 +638,42 @@ public class FrmProviders extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtCepPActionPerformed
 
-    private void tableClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientMouseClicked
+    private void tableProviderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProviderMouseClicked
         jTabbedPane1.setSelectedIndex(0);
         
-        txtCodeP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 0).toString());
-        txtNameP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 1).toString());
-        txtCnpj.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 2).toString());
-        txtEmailP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 3).toString());
-        txtCellP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 4).toString());
-        txtTelephoneP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 5).toString());
-        txtCepP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 6).toString());
-        txtCityP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 7).toString());
-        txtAddressP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 8).toString());
-        txtNeighBorhoodP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 9).toString());
-        txtNumberP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 10).toString());
-        txtComplementP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 11).toString());
-        cbxUfP.setSelectedItem(tableClient.getValueAt(tableClient.getSelectedRow(), 12).toString());
-        
-    }//GEN-LAST:event_tableClientMouseClicked
+        txtCodeP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 0).toString());
+        txtNameP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 1).toString());
+        txtCnpj.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 2).toString());
+        txtEmailP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 3).toString());
+        txtCellP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 4).toString());
+        txtTelephoneP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 5).toString());
+        txtCepP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 6).toString());
+        txtCityP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 7).toString());
+        txtAddressP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 8).toString());
+        txtNeighBorhoodP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 9).toString());
+        txtNumberP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 10).toString());
+        txtComplementP.setText(tableProvider.getValueAt(tableProvider.getSelectedRow(), 11).toString());
+        cbxUfP.setSelectedItem(tableProvider.getValueAt(tableProvider.getSelectedRow(), 12).toString());
+    }//GEN-LAST:event_tableProviderMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
          findAll();
     }//GEN-LAST:event_formWindowActivated
 
     private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
-       try{
+      try{
         String name = "%"+txtSearch.getText()+"%";
        
-       ClientDAO dao = new ClientDAO();
-       List<Client> list = dao.findClientByName(name);
-       DefaultTableModel dfd = (DefaultTableModel) tableClient.getModel();
+       ProviderDAO dao = new ProviderDAO();
+       List<Providers> list = dao.findProvidersByName(name);
+       DefaultTableModel dfd = (DefaultTableModel) tableProvider.getModel();
        dfd.setRowCount(0);
                
-               for(Client c:list){
+               for(Providers c:list){
              dfd.addRow(new Object[]{
                  c.getId(),
                  c.getName(),
-                 c.getRg(),
-                 c.getCpf(),
+                 c.getCnpj(),
                  c.getEmail(),
                  c.getTelephone(),
                  c.getCell(),
@@ -687,17 +695,17 @@ public class FrmProviders extends javax.swing.JFrame {
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
         String name = "%"+txtSearch.getText()+"%";
        
-       ClientDAO dao = new ClientDAO();
-       List<Client> list = dao.findClientByName(name);
-       DefaultTableModel dfd = (DefaultTableModel) tableClient.getModel();
+       ProviderDAO dao = new ProviderDAO();
+       List<Providers> list = dao.findProvidersByName(name);
+       DefaultTableModel dfd = (DefaultTableModel) tableProvider.getModel();
        dfd.setRowCount(0);
                
-               for(Client c:list){
+               for(Providers c:list){
              dfd.addRow(new Object[]{
                  c.getId(),
                  c.getName(),
                  c.getRg(),
-                 c.getCpf(),
+                 c.getCnpj(),
                  c.getEmail(),
                  c.getTelephone(),
                  c.getCell(),
@@ -712,43 +720,52 @@ public class FrmProviders extends javax.swing.JFrame {
          }
         
     }//GEN-LAST:event_txtSearchKeyPressed
-
-    private void bttSearchCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchCpfActionPerformed
- /*       Client obj = new Client();
-        ClientDAO dao = new ClientDAO();
-        String cpf = txtCnpj.getText();
-        
-        obj = dao.findByCpf(cpf);
-        
-        txtCodeP.setText(String.valueOf(obj.getId()));
-        txtNameP.setText(obj.getName());
-        txtRgP.setText(obj.getRg());
-        txtCnpj.setText(obj.getCpf());
-        txtEmailP.setText(obj.getEmail());
-        txtTelephoneP.setText(obj.getTelephone());
-        txtCellP.setText(obj.getCell());
-        txtCepP.setText(obj.getCep());
-        txtAddressP.setText(obj.getAddress());
-        txtNumberP.setText(String.valueOf(obj.getNumber()));
-        txtComplementP.setText(obj.getComplement());
-        txtNeighBorhoodP.setText(obj.getNeighborhood());
-        txtCityP.setText(obj.getCity());
-        cbxUfP.setSelectedItem(obj.getAddress());
-   */     
-    }//GEN-LAST:event_bttSearchCpfActionPerformed
  
     private void txtCepPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepPKeyPressed
-      if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
-         Client obj =  new Client();
-         ClientDAO dao = new ClientDAO();
+    /*  if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+         Providers obj =  new Providers();
+         ProviderDAO dao = new ProviderDAO();
          obj = dao.buscaCep(txtCepP.getText());
          
          txtAddressP.setText(obj.getAddress());
          txtNeighBorhoodP.setText(obj.getNeighborhood());
          txtCityP.setText(obj.getCity());
         cbxUfP.setSelectedItem(obj.getUf());               
-     }
+        }
+        */
     }//GEN-LAST:event_txtCepPKeyPressed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String name = txtNameP.getText();
+        Providers obj = new Providers();
+        ProviderDAO dao = new ProviderDAO();
+        
+        obj = dao.findProviderByName(name);
+        
+        if(obj.getName()!= null){
+            txtCodeP.setText(String.valueOf(obj.getId()));
+            txtNameP.setText(obj.getName());
+            txtCnpj.setText(obj.getCnpj());
+            txtEmailP.setText(obj.getEmail());
+            txtTelephoneP.setText(obj.getTelephone());
+            txtCellP.setText(obj.getCell());
+            txtCepP.setText(obj.getCep());
+            txtAddressP.setText(obj.getAddress());
+            txtNumberP.setText(String.valueOf(obj.getNumber()));
+            txtComplementP.setText(obj.getComplement());
+            txtNeighBorhoodP.setText(obj.getNeighborhood());
+            txtCityP.setText(obj.getCity());
+            cbxUfP.setSelectedItem(obj.getAddress());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tableProviderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableProviderKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableProviderKeyPressed
    
     /**
      * @param args the command line arguments
@@ -792,8 +809,8 @@ public class FrmProviders extends javax.swing.JFrame {
     private javax.swing.JButton btNewP;
     private javax.swing.JButton btnSearchName;
     private javax.swing.JButton bttSaveP;
-    private javax.swing.JButton bttSearchCpf;
     private javax.swing.JComboBox<String> cbxUfP;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -814,7 +831,7 @@ public class FrmProviders extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private java.awt.Label label1;
     private javax.swing.JPanel panelData;
-    private javax.swing.JTable tableClient;
+    private javax.swing.JTable tableProvider;
     private javax.swing.JTextField txtAddressP;
     private javax.swing.JFormattedTextField txtCellP;
     private javax.swing.JFormattedTextField txtCepP;

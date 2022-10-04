@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class FrmClient extends javax.swing.JFrame {
+public class FrmClient1 extends javax.swing.JFrame {
 
-    public FrmClient() {
+    public FrmClient1() {
         initComponents();
     }
     
@@ -808,7 +808,7 @@ public class FrmClient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmClient().setVisible(true);
+                new FrmClient1().setVisible(true);
             }
         });
     }

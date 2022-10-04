@@ -2,14 +2,14 @@
 package br.com.project.model;
 
 public class Providers extends Client{
-    private String Cnpg;
+    private String Cnpj;
 
-    public String getCnpg() {
-        return Cnpg;
+    public String getCnpj() {
+        return Cnpj;
     }
 
-    public void setCnpg(String Cnpg) {
-        this.Cnpg = Cnpg;
+    public void setCnpj(String Cnpj) {
+        this.Cnpj = Cnpj;
     }
     
 }
