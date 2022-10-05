@@ -11,5 +11,13 @@ public class Providers extends Client{
     public void setCnpj(String Cnpj) {
         this.Cnpj = Cnpj;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+    
+    
+    
     
 }
