@@ -20,33 +20,24 @@ public class FrmProducts extends javax.swing.JFrame {
     
     public void findAll(){
         try{
-        ClientDAO dao = new ClientDAO();
-         List<Client> list = dao.findAllClients();
+        ProductDAO dao = new ProductDAO();
+         List<Product> list = dao.findAllProducts();
          DefaultTableModel dados = (DefaultTableModel) tableProduct.getModel();
          dados.setNumRows(0);
        
          
-         for(Client c:list){
+         for(Product c:list){
              dados.addRow(new Object[]{
-                 c.getId(),
-                 c.getName(),
-                 c.getRg(),
-                 c.getCpf(),
-                 c.getEmail(),
-                 c.getTelephone(),
-                 c.getCell(),
-                 c.getCep(),
-                 c.getCity(),
-                 c.getAddress(),
-                 c.getNeighborhood(),
-                 c.getNumber(),
-                 c.getComplement(),
-                 c.getUf()    
+                c.getId(),
+                c.getDescription(),
+                c.getPrice(),
+                c.getQuantity(),
+                c.getProvider().getName()
          });
          }
 }catch(Exception e){
    e.printStackTrace();
-    }
+     }
     }
     
     
@@ -59,14 +50,14 @@ public class FrmProducts extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
-        btnSearchName = new javax.swing.JButton();
+        txtDescription = new javax.swing.JTextField();
+        btnSearchDescription = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduct = new javax.swing.JTable();
         panelData = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
-        txtDescription = new javax.swing.JTextField();
+        txtDescription2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
@@ -74,7 +65,7 @@ public class FrmProducts extends javax.swing.JFrame {
         txtQuantity = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         cbxProviders = new javax.swing.JComboBox();
-        bttSearchDescription = new javax.swing.JButton();
+        bttSearchDescription2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         btNew = new javax.swing.JButton();
         btEdit = new javax.swing.JButton();
@@ -118,18 +109,23 @@ public class FrmProducts extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Nome:");
 
-        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDescription.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescriptionActionPerformed(evt);
+            }
+        });
+        txtDescription.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
+                txtDescriptionKeyPressed(evt);
             }
         });
 
-        btnSearchName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSearchName.setText("Pesquisar");
-        btnSearchName.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchDescription.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSearchDescription.setText("Pesquisar");
+        btnSearchDescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchNameActionPerformed(evt);
+                btnSearchDescriptionActionPerformed(evt);
             }
         });
 
@@ -159,9 +155,9 @@ public class FrmProducts extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSearchName)
+                .addComponent(btnSearchDescription)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
@@ -173,8 +169,8 @@ public class FrmProducts extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchName))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchDescription))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -192,9 +188,9 @@ public class FrmProducts extends javax.swing.JFrame {
             }
         });
 
-        txtDescription.addActionListener(new java.awt.event.ActionListener() {
+        txtDescription2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescriptionActionPerformed(evt);
+                txtDescription2ActionPerformed(evt);
             }
         });
 
@@ -231,11 +227,16 @@ public class FrmProducts extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        cbxProviders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxProvidersMouseClicked(evt);
+            }
+        });
 
-        bttSearchDescription.setText("Pesquisar");
-        bttSearchDescription.addActionListener(new java.awt.event.ActionListener() {
+        bttSearchDescription2.setText("Pesquisar");
+        bttSearchDescription2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttSearchDescriptionActionPerformed(evt);
+                bttSearchDescription2ActionPerformed(evt);
             }
         });
 
@@ -265,9 +266,9 @@ public class FrmProducts extends javax.swing.JFrame {
                             .addGroup(panelDataLayout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDescription2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(bttSearchDescription))
+                                .addComponent(bttSearchDescription2))
                             .addGroup(panelDataLayout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addComponent(jLabel3)
@@ -290,8 +291,8 @@ public class FrmProducts extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bttSearchDescription)
+                    .addComponent(txtDescription2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttSearchDescription2)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -375,9 +376,9 @@ public class FrmProducts extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodeActionPerformed
 
-    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
+    private void txtDescription2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescription2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescriptionActionPerformed
+    }//GEN-LAST:event_txtDescription2ActionPerformed
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
@@ -392,34 +393,26 @@ public class FrmProducts extends javax.swing.JFrame {
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-   /*      Client obj =  new Client();
-            obj.setName(txtDescription.getText());
-            obj.setRg(txtRg.getText());
-            obj.setCpf(txtCpf.getText());
-            obj.setEmail(txtPrice.getText());
-            obj.setCell(txtCell.getText());
-            obj.setTelephone(txtTelephone.getText());
-            obj.setCep(txtCep.getText());
-            obj.setCity(txtQuantity.getText());
-            obj.setAddress(txtAddress.getText());
-            obj.setNeighborhood(txtNeighBorhood.getText());
-            obj.setComplement(txtComplement.getText());
-            obj.setNumber(Integer.parseInt(txtNumber.getText()));
-            obj.setUf(cbxProviders.getSelectedItem().toString());
-            obj.setId(Integer.parseInt(txtCode.getText()));
+      Product obj = new Product();
+      obj.setId(Integer.parseInt(txtCode.getText()));
+      obj.setDescription(txtDescription2.getText());
+      obj.setPrice(Double.parseDouble(txtPrice.getText()));
+      obj.setQuantity(Integer.parseInt(txtQuantity.getText()));
+      Providers p = new Providers();
+      p = (Providers) cbxProviders.getSelectedItem();
+      obj.setProvider(p);
+ 
+      ProductDAO dao = new ProductDAO();
+      dao.updateProduct(obj);
             
-            
-            ClientDAO objDao = new ClientDAO();
-            objDao.updateClient(obj);
-            
-            new br.com.project.util.Util().cleanPane(panelData);
- */
+       new br.com.project.util.Util().cleanPane(panelData);
+ 
     }//GEN-LAST:event_btEditActionPerformed
 
     private void bttSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSaveActionPerformed
 
             Product obj = new Product();
-            obj.setDescription(txtDescription.getText());
+            obj.setDescription(txtDescription2.getText());
             obj.setPrice(Double.parseDouble(txtPrice.getText()));
             obj.setQuantity(Integer.parseInt(txtQuantity.getText()));
             Providers p = new Providers();
@@ -433,11 +426,11 @@ public class FrmProducts extends javax.swing.JFrame {
     }//GEN-LAST:event_bttSaveActionPerformed
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-          Client obj =  new Client();
+          Product obj =  new Product();
             
              obj.setId(Integer.parseInt(txtCode.getText()));
-             ClientDAO objDao = new ClientDAO();
-             objDao.deleteByIdClient(obj);
+             ProductDAO objDao = new ProductDAO();
+             objDao.deleteProduct(obj);
              
              new br.com.project.util.Util().cleanPane(panelData);
     }                                      
@@ -465,13 +458,17 @@ public class FrmProducts extends javax.swing.JFrame {
     }//GEN-LAST:event_btDeleteActionPerformed
 
     private void tableProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductMouseClicked
-       jTabbedPane1.setSelectedIndex(0);
+       jTabbedPane1.setSelectedIndex(1);
         
         txtCode.setText(tableProduct.getValueAt(tableProduct.getSelectedRow(), 0).toString());
-        txtDescription.setText(tableProduct.getValueAt(tableProduct.getSelectedRow(), 1).toString());
+        txtDescription2.setText(tableProduct.getValueAt(tableProduct.getSelectedRow(), 1).toString());
         txtPrice.setText(tableProduct.getValueAt(tableProduct.getSelectedRow(), 2).toString());
         txtQuantity.setText(tableProduct.getValueAt(tableProduct.getSelectedRow(), 3).toString());
-        cbxProviders.setSelectedItem(tableProduct.getValueAt(tableProduct.getSelectedRow(), 4).toString());
+        Providers p = new Providers();
+        ProviderDAO dao = new ProviderDAO();
+        p = dao.findProviderByName(tableProduct.getValueAt(tableProduct.getSelectedRow(), 4).toString());
+        cbxProviders.removeAllItems();
+        cbxProviders.getModel().setSelectedItem(p);
     
     }//GEN-LAST:event_tableProductMouseClicked
 ;
@@ -479,91 +476,74 @@ public class FrmProducts extends javax.swing.JFrame {
          findAll();
     }//GEN-LAST:event_formWindowActivated
 
-    private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
+    private void btnSearchDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDescriptionActionPerformed
        try{
-        String name = "%"+txtSearch.getText()+"%";
+        String name = "%"+txtDescription.getText()+"%";
        
-       ClientDAO dao = new ClientDAO();
-       List<Client> list = dao.findClientByName(name);
+       ProductDAO dao = new ProductDAO();
+       List<Product> list = dao.findProducts(name);
        DefaultTableModel dfd = (DefaultTableModel) tableProduct.getModel();
        dfd.setRowCount(0);
                
-               for(Client c:list){
+               for(Product c:list){
              dfd.addRow(new Object[]{
                  c.getId(),
-                 c.getName(),
-                 c.getRg(),
-                 c.getCpf(),
-                 c.getEmail(),
-                 c.getTelephone(),
-                 c.getCell(),
-                 c.getCep(),
-                 c.getCity(),
-                 c.getAddress(),
-                 c.getNeighborhood(),
-                 c.getNumber(),
-                 c.getComplement(),
-                 c.getUf()    
+                 c.getDescription(),
+                 c.getPrice(),
+                 c.getQuantity(),
+                 c.getProvider().getId()
          });
          }
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
        }
       
-    }//GEN-LAST:event_btnSearchNameActionPerformed
+    }//GEN-LAST:event_btnSearchDescriptionActionPerformed
 
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        String name = "%"+txtSearch.getText()+"%";
+    private void txtDescriptionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescriptionKeyPressed
+        String name = "%"+txtDescription.getText()+"%";
        
-       ClientDAO dao = new ClientDAO();
-       List<Client> list = dao.findClientByName(name);
+       ProductDAO dao = new ProductDAO();
+       List<Product> list = dao.findProducts(name);
        DefaultTableModel dfd = (DefaultTableModel) tableProduct.getModel();
        dfd.setRowCount(0);
                
-               for(Client c:list){
+               for(Product c:list){
              dfd.addRow(new Object[]{
                  c.getId(),
-                 c.getName(),
-                 c.getRg(),
-                 c.getCpf(),
-                 c.getEmail(),
-                 c.getTelephone(),
-                 c.getCell(),
-                 c.getCep(),
-                 c.getCity(),
-                 c.getAddress(),
-                 c.getNeighborhood(),
-                 c.getNumber(),
-                 c.getComplement(),
-                 c.getUf()    
+                 c.getDescription(),
+                 c.getPrice(),
+                 c.getQuantity(),
+                 c.getProvider().getId()   
          });
          }
         
-    }//GEN-LAST:event_txtSearchKeyPressed
+    }//GEN-LAST:event_txtDescriptionKeyPressed
 
-    private void bttSearchDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchDescriptionActionPerformed
-   /*     Client obj = new Client();
-        ClientDAO dao = new ClientDAO();
-        String cpf = txtCpf.getText();
+    private void bttSearchDescription2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchDescription2ActionPerformed
+   Product obj = new Product();
+        ProductDAO dao = new ProductDAO();
+        String description2 = txtDescription2.getText();
+        obj = dao.findProduct(description2);
         
-        obj = dao.findByCpf(cpf);
+        cbxProviders.removeAllItems();
+        
+        if(obj.getDescription()!=null){
         
         txtCode.setText(String.valueOf(obj.getId()));
-        txtDescription.setText(obj.getName());
-        txtRg.setText(obj.getRg());
-        txtCpf.setText(obj.getCpf());
-        txtPrice.setText(obj.getEmail());
-        txtTelephone.setText(obj.getTelephone());
-        txtCell.setText(obj.getCell());
-        txtCep.setText(obj.getCep());
-        txtAddress.setText(obj.getAddress());
-        txtNumber.setText(String.valueOf(obj.getNumber()));
-        txtComplement.setText(obj.getComplement());
-        txtNeighBorhood.setText(obj.getNeighborhood());
-        txtQuantity.setText(obj.getCity());
-        cbxProviders.setSelectedItem(obj.getAddress());
-    */    
-    }//GEN-LAST:event_bttSearchDescriptionActionPerformed
+        txtDescription.setText(obj.getDescription());
+        txtPrice.setText(String.valueOf(obj.getPrice()));
+        txtQuantity.setText(String.valueOf(obj.getQuantity()));
+        
+        Providers p = new Providers();
+        ProviderDAO prodao = new ProviderDAO();
+        p = prodao.findProviderByName(obj.getProvider().getName());
+        cbxProviders.getModel().setSelectedItem(p);
+        }else{
+            JOptionPane.showMessageDialog(null, "Not found product");
+        }
+      
+    }//GEN-LAST:event_bttSearchDescription2ActionPerformed
 
     private void cbxProvidersAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxProvidersAncestorAdded
        ProviderDAO dao = new ProviderDAO();
@@ -574,6 +554,14 @@ public class FrmProducts extends javax.swing.JFrame {
           cbxProviders.addItem(p);
        }
     }//GEN-LAST:event_cbxProvidersAncestorAdded
+
+    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescriptionActionPerformed
+
+    private void cbxProvidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxProvidersMouseClicked
+     
+    }//GEN-LAST:event_cbxProvidersMouseClicked
     
     /**
      * @param args the command line arguments
@@ -629,9 +617,9 @@ public class FrmProducts extends javax.swing.JFrame {
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
     private javax.swing.JButton btNew;
-    private javax.swing.JButton btnSearchName;
+    private javax.swing.JButton btnSearchDescription;
     private javax.swing.JButton bttSave;
-    private javax.swing.JButton bttSearchDescription;
+    private javax.swing.JButton bttSearchDescription2;
     private javax.swing.JComboBox cbxProviders;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -649,9 +637,9 @@ public class FrmProducts extends javax.swing.JFrame {
     private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtDescription;
+    private javax.swing.JTextField txtDescription2;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuantity;
-    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
 }
