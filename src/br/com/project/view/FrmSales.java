@@ -11,16 +11,13 @@ import br.com.project.model.Product;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-/**
- *
- * @author Bilad
- */
 public class FrmSales extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmSales
-     */
+   public double subTotal,total,price;
+   public int quantity;
     public FrmSales() {
         initComponents();
     }
@@ -264,9 +261,9 @@ public class FrmSales extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPriceUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPriceUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(bttAddItem, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -276,10 +273,7 @@ public class FrmSales extends javax.swing.JFrame {
 
         tableShoppingCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Produto", "Quantidade", "Preço", "SubTotal"
@@ -437,7 +431,23 @@ public class FrmSales extends javax.swing.JFrame {
     }//GEN-LAST:event_bttCodeActionPerformed
 
     private void bttAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttAddItemActionPerformed
-        // TODO add your handling code here:
+       price = Double.parseDouble(txtPriceUnit.getText());
+       quantity = Integer.parseInt(txtQtd.getText());
+       subTotal = price * quantity;
+       total += subTotal;
+       txtTotalSale.setText(String.valueOf(total));
+       
+       DefaultTableModel cart = new DefaultTableModel();
+       cart = (DefaultTableModel) tableShoppingCart.getModel();
+       cart.addRow(new Object[]{
+        txtCode.getText(),
+        txtDescription.getText(),
+        txtQtd.getText(),
+        txtPriceUnit.getText(),
+        subTotal
+    });
+       
+       
     }//GEN-LAST:event_bttAddItemActionPerformed
 
     private void txtTotalSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalSaleActionPerformed
