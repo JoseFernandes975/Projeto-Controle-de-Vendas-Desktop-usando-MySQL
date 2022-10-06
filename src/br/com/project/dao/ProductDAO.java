@@ -164,4 +164,28 @@ public class ProductDAO {
           return p;
       }
       
-}
+      public Product findByCode(int code){
+          PreparedStatement st = null;
+          ResultSet rs= null;
+              Product p = new Product();
+          try{
+              st = conn.prepareStatement("SELECT * FROM tb_produtos WHERE Id = ?");
+              
+               st.setInt(1, code);
+              
+              rs = st.executeQuery();
+              
+              if(rs.next()){
+                  p.setDescription(rs.getString("Descricao"));
+                  p.setPrice(rs.getDouble("Preco"));
+                  p.setQuantity(rs.getInt("Quantidade_Estoque"));
+                  p.setId(rs.getInt("Id"));
+              }
+              return p;
+          }catch(SQLException e){
+              JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+          }
+          return p;
+          }
+      }
+

@@ -4,6 +4,11 @@
  */
 package br.com.project.view;
 
+import br.com.project.dao.ClientDAO;
+import br.com.project.dao.ProductDAO;
+import br.com.project.model.Client;
+import br.com.project.model.Product;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -98,6 +103,11 @@ public class FrmSales extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCPFKeyPressed(evt);
+            }
+        });
 
         jLabel3.setText("Nome:");
 
@@ -218,22 +228,21 @@ public class FrmSales extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(55, 55, 55)
                                         .addComponent(bttCode)
-                                        .addGap(75, 75, 75))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addComponent(jLabel8)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPriceUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(122, 122, 122)
@@ -400,7 +409,14 @@ public class FrmSales extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataActionPerformed
 
     private void bttSearchNameSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchNameSaleActionPerformed
-        // TODO add your handling code here:
+    
+        Client obj = new Client();
+        ClientDAO dao = new ClientDAO();
+        
+        obj = dao.findByCpf(txtCPF.getText());
+        txtName.setText(obj.getName());
+        
+        
     }//GEN-LAST:event_bttSearchNameSaleActionPerformed
 
     private void txtQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdActionPerformed
@@ -412,7 +428,12 @@ public class FrmSales extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceUnitActionPerformed
 
     private void bttCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttCodeActionPerformed
-        // TODO add your handling code here:
+    Product p = new Product();
+    ProductDAO dao = new ProductDAO();
+    p = dao.findByCode(Integer.parseInt(txtCode.getText()));
+    txtDescription.setText(p.getDescription());
+    txtPriceUnit.setText(String.valueOf(p.getPrice()));
+    txtQtd.setText(String.valueOf(p.getQuantity()));
     }//GEN-LAST:event_bttCodeActionPerformed
 
     private void bttAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttAddItemActionPerformed
@@ -441,6 +462,16 @@ public class FrmSales extends javax.swing.JFrame {
      String dateFormated = sdf.format(dateNow);
      txtData.setText(dateFormated);
     }//GEN-LAST:event_formWindowActivated
+
+    private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Client c = new Client();
+            ClientDAO cd = new ClientDAO();
+            
+            c = cd.findByCpf(txtCPF.getText());
+            txtName.setText(c.getName());
+        }
+    }//GEN-LAST:event_txtCPFKeyPressed
 
     /**
      * @param args the command line arguments
