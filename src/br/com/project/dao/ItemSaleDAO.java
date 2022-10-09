@@ -62,7 +62,7 @@ public class ItemSaleDAO {
         ResultSet rs = null;
         List<Item_sales> list = new ArrayList();
         try{
-            st = conn.prepareStatement("SELECT i.Id, p.Descricao, i.Quantidade, p.Preco, i.Subtotal FROM tb_itensvendas AS i INNER "
+            st = conn.prepareStatement("SELECT p.Descricao, i.Quantidade, p.Preco, i.Subtotal FROM tb_itensvendas AS i INNER "
                     + "JOIN tb_produtos AS p ON (i.Produto_id = p.Id) WHERE i.Venda_id = ?");
             
             st.setInt(1, venda_id);
@@ -72,7 +72,6 @@ public class ItemSaleDAO {
             while(rs.next()){
                Item_sales item = new Item_sales();
                Product prod = new Product();
-               item.setId(rs.getInt("i.Id"));
                prod.setDescription(rs.getString("p.Descricao"));
                item.setQuantity(rs.getInt("i.Quantidade"));
                prod.setPrice(rs.getDouble("p.Preco"));

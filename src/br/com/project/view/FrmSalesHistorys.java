@@ -1,6 +1,8 @@
 package br.com.project.view;
 
+import br.com.project.dao.ItemSaleDAO;
 import br.com.project.dao.SaleDAO;
+import br.com.project.model.Item_sales;
 import br.com.project.model.Sales;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -188,10 +190,29 @@ public class FrmSalesHistorys extends javax.swing.JFrame {
 
     private void TableStorysMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableStorysMouseClicked
         FrmSaleDetail screen = new FrmSaleDetail();
+        
+        int venda_id = Integer.parseInt(TableStorys.getValueAt(TableStorys.getSelectedRow(), 0).toString());
         screen.txtClient.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(),2).toString());
         screen.txtDate.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(), 1).toString());
         screen.txtTotalsale.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(), 3).toString());
         screen.txtObs.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(), 4).toString());
+        screen.setVisible(true);
+        
+        Item_sales item = new Item_sales();
+        ItemSaleDAO daoItem = new ItemSaleDAO();
+        List<Item_sales> list = daoItem.findItemBySale(venda_id);
+        
+        DefaultTableModel data = (DefaultTableModel) screen.tableDetailSale.getModel();
+        data.setNumRows(0);
+        
+        for(Item_sales is: list){
+            data.addRow(new Object[]{
+              is.getProducts().getDescription(),
+                is.getQuantity(),
+                is.getProducts().getPrice(),
+                is.getSubtotal()
+            });
+        }
         screen.setVisible(true);
     }//GEN-LAST:event_TableStorysMouseClicked
 
@@ -231,7 +252,7 @@ public class FrmSalesHistorys extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableStorys;
+    public javax.swing.JTable TableStorys;
     private javax.swing.JButton bttSearchData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
