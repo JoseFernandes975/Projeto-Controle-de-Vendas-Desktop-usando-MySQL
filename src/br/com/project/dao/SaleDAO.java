@@ -82,8 +82,9 @@ public class SaleDAO {
         ResultSet rs = null;
         List<Sales> list = new ArrayList();
         try{
-            st = conn.prepareStatement("SELECT * FROM tb_vendas INNER JOIN tb_clientes ON (tb_vendas.Cliente_id = tb_clientes.Id) "
-                    + "WHERE tb_vendas.Data_venda BETWEEN ? AND ?");
+            st = conn.prepareStatement("SELECT v.Id , date_format(v.Data_venda,'%d/%m/%Y') as data_formatada, c.Nome, v.Total_venda, v.Observacoes"
+                    + " FROM tb_vendas AS v INNER JOIN tb_clientes AS c ON (v.Cliente_id = c.Id) "
+                      + "WHERE v.Data_venda BETWEEN ? AND ?");
             
               st.setString(1, data_begin.toString());
               st.setString(2, data_final.toString());
@@ -93,11 +94,11 @@ public class SaleDAO {
               while(rs.next()){
                   Sales sale = new Sales();
                   Client c =  new Client();
-                  sale.setId(rs.getInt("Id"));
-                  sale.setDate_sales(rs.getString("Data_venda"));
-                  c.setName(rs.getString("Nome"));
-                  sale.setTotal_sales(rs.getDouble("Total_venda"));
-                  sale.setObs(rs.getString("Observacoes"));
+                  sale.setId(rs.getInt("v.Id"));
+                  sale.setDate_sales(rs.getString("data_formatada"));
+                  c.setName(rs.getString("c.Nome"));
+                  sale.setTotal_sales(rs.getDouble("v.Total_venda"));
+                  sale.setObs(rs.getString("v.Observacoes"));
                   sale.setClient(c);
                      
                   list.add(sale);
