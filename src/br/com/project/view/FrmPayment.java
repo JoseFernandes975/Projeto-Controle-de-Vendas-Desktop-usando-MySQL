@@ -42,7 +42,8 @@ public class FrmPayment extends javax.swing.JFrame {
         txtTotal = new javax.swing.JTextField();
         bttFinish = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtObs = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtObs = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +97,10 @@ public class FrmPayment extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel6.setText("Obs:");
 
+        txtObs.setColumns(20);
+        txtObs.setRows(5);
+        jScrollPane1.setViewportView(txtObs);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,7 +127,7 @@ public class FrmPayment extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +137,7 @@ public class FrmPayment extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtCard, txtMoney, txtThing, txtTotal});
@@ -143,9 +148,7 @@ public class FrmPayment extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(txtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -153,8 +156,9 @@ public class FrmPayment extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtCard, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                            .addComponent(txtCard, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtThing, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,12 +176,13 @@ public class FrmPayment extends javax.swing.JFrame {
 
     private void bttFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttFinishActionPerformed
        double total, money, card, totalPay, thing;
+       
        money = Double.parseDouble(txtMoney.getText());
        card = Double.parseDouble(txtCard.getText());
        total = Double.parseDouble(txtTotal.getText());
        
-       totalPay = money + card;
-       thing = totalPay - total;
+      totalPay = money + card;
+      thing = totalPay - total;
       txtThing.setText(String.valueOf(thing));
       
       Sales sale = new Sales();
@@ -190,7 +195,8 @@ public class FrmPayment extends javax.swing.JFrame {
       sale.setDate_sales(dataMySql);
       sale.setTotal_sales(total);
       sale.setObs(txtObs.getText());
-            SaleDAO dao = new SaleDAO();
+      
+      SaleDAO dao = new SaleDAO();
       dao.insertSales(sale);
       JOptionPane.showMessageDialog(null, "Insert sale completed!");
       
@@ -198,8 +204,8 @@ public class FrmPayment extends javax.swing.JFrame {
    
     
       for(int i = 0; i<trolley.getRowCount();i++){
-          int qtt_now, qtt_buy, qtt_updated;
-          Product objp = new Product();
+           int qtt_now, qtt_buy, qtt_updated;
+           Product objp = new Product();
            ProductDAO daoP = new ProductDAO();
 
           Item_sales is = new Item_sales();
@@ -213,7 +219,7 @@ public class FrmPayment extends javax.swing.JFrame {
           qtt_buy = Integer.parseInt(trolley.getValueAt(i, 2).toString());
           qtt_updated = qtt_now - qtt_buy;
           
-         daoP.updateStock(objp.getId(), qtt_updated);
+          daoP.updateStock(objp.getId(), qtt_updated);
        
           ItemSaleDAO daoIs = new ItemSaleDAO();
           daoIs.insertItem(is);
@@ -264,9 +270,10 @@ public class FrmPayment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtCard;
     private javax.swing.JTextField txtMoney;
-    private javax.swing.JTextField txtObs;
+    private javax.swing.JTextArea txtObs;
     private javax.swing.JTextField txtThing;
     public javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables

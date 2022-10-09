@@ -5,6 +5,7 @@ import br.com.project.model.Sales;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmSalesHistorys extends javax.swing.JFrame {
@@ -128,6 +129,11 @@ public class FrmSalesHistorys extends javax.swing.JFrame {
                 "Código", "Data da Venda", "Cliente", "Total da Venda", "Observações"
             }
         ));
+        TableStorys.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableStorysMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableStorys);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,7 +159,8 @@ public class FrmSalesHistorys extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttSearchDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchDataActionPerformed
-     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+     try{
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
      
         LocalDate data_new = LocalDate.parse(txtDataBegin.getText(), format);
         LocalDate dat_final = LocalDate.parse(txtDataFinal.getText(), format);
@@ -174,7 +181,19 @@ public class FrmSalesHistorys extends javax.swing.JFrame {
             
         });
     }
+     }catch(Exception e){
+         JOptionPane.showMessageDialog(null, "Digite duas datas como intervalo!");
+     }
     }//GEN-LAST:event_bttSearchDataActionPerformed
+
+    private void TableStorysMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableStorysMouseClicked
+        FrmSaleDetail screen = new FrmSaleDetail();
+        screen.txtClient.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(),2).toString());
+        screen.txtDate.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(), 1).toString());
+        screen.txtTotalsale.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(), 3).toString());
+        screen.txtObs.setText(TableStorys.getValueAt(TableStorys.getSelectedRow(), 4).toString());
+        screen.setVisible(true);
+    }//GEN-LAST:event_TableStorysMouseClicked
 
     /**
      * @param args the command line arguments
