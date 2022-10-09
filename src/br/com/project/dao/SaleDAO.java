@@ -110,5 +110,25 @@ public class SaleDAO {
         return list;
     }
     
-    
+    public double returnTotal(LocalDate datee){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        double totalsale = 0.0;
+        try{
+              totalsale = 0.0;
+            st = conn.prepareStatement("SELECT SUM(Total_venda) AS total FROM tb_vendas WHERE Data_venda = ?");
+            
+            st.setString(1, datee.toString());
+            
+            rs = st.executeQuery();
+            
+            if(rs.next()){
+                totalsale = rs.getDouble("total");
+        }
+            return totalsale;
+    }catch(SQLException e){
+       e.printStackTrace();
+    }
+        return totalsale;
+    }
 }
