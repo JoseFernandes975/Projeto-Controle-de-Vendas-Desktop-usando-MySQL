@@ -187,5 +187,47 @@ public class ProductDAO {
           }
           return p;
           }
+      
+      public void updateStock(int id, int quantityNew){
+          PreparedStatement st = null;
+          try{
+              st = conn.prepareStatement("UPDATE tb_produtos SET Quantidade_Estoque = ? WHERE Id = ? ");
+              
+              st.setInt(1, quantityNew);
+              st.setInt(2, id);
+              st.executeUpdate();
+              st.close();
+              
+              JOptionPane.showMessageDialog(null, "Atualizado a quantidade de estoque!");
+          }catch(SQLException e){
+              JOptionPane.showMessageDialog(null, e.getMessage());
+          }
       }
+      
+      public int returnCurrentStock(int id){
+          PreparedStatement st = null;
+          ResultSet rs = null;
+          int qtt = 0;
+          try{
+              st = conn.prepareStatement("SELECT Quantidade_Estoque FROM tb_produtos WHERE Id = ?");
+              
+              st.setInt(1, id);
+              rs = st.executeQuery();
+              
+              if(rs.next()){
+                  qtt = rs.getInt("Quantidade_Estoque");
+              }
+              
+              return qtt;
+           
+          }catch(SQLException e){
+              JOptionPane.showMessageDialog(null, e.getMessage());
+          }
+          return qtt;
+      }
+              
+        
+      }
+
+
 

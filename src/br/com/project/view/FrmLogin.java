@@ -123,6 +123,8 @@ public class FrmLogin extends javax.swing.JFrame {
         String email, senha;
        email = txtEmailLogin.getText();
        senha = txtPassswordLogin.getText();
+
+       
        
        EmployeeDAO dao = new EmployeeDAO();
        dao.login(email, senha);

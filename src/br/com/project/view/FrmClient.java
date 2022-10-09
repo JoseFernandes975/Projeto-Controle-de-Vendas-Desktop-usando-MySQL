@@ -604,11 +604,15 @@ public class FrmClient extends javax.swing.JFrame {
             obj.setComplement(txtComplement.getText());
             obj.setNumber(Integer.parseInt(txtNumber.getText()));
             obj.setUf(cbxUf.getSelectedItem().toString());
+          
+
+           
             
             ClientDAO objDao = new ClientDAO();
             objDao.insertClient(obj);
             
             new br.com.project.util.Util().cleanPane(panelData);
+            
  
     }//GEN-LAST:event_bttSaveActionPerformed
 
