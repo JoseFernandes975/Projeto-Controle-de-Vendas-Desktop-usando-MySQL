@@ -243,11 +243,21 @@ public class EmployeeDAO {
             rs = st.executeQuery();
             
             if(rs.next()){
+                
+                if(rs.getString("Nivel_acesso").equals("Administrador")){
                 JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Sistema");
                 FrmMenu tela = new FrmMenu();
                 tela.setVisible(true);
                 tela.userConnected = rs.getString("Nome");
-                
+                }
+                else if(rs.getString("Nivel_acesso").equals("Usuário")){
+                   JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Sistema");
+                   FrmMenu tela = new FrmMenu();
+                   tela.screenMenu_SaleDay.setVisible(false);
+                   tela.screenMenu_HistorySale.setVisible(false);
+                   tela.setVisible(true);
+                   tela.userConnected = rs.getString("Nome");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Dados incorretos!");
