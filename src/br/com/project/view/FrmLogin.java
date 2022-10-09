@@ -1,6 +1,7 @@
 package br.com.project.view;
 
 import br.com.project.dao.EmployeeDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,6 +67,11 @@ public class FrmLogin extends javax.swing.JFrame {
 
         bttExit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bttExit.setText("SAIR");
+        bttExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttExitActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("E-mail:");
@@ -133,6 +139,14 @@ public class FrmLogin extends javax.swing.JFrame {
            e.getMessage();
        }
     }//GEN-LAST:event_bttLoginActionPerformed
+
+    private void bttExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttExitActionPerformed
+     int op;
+      op = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+     if(op == 0){
+         System.exit(0);
+       }
+    }//GEN-LAST:event_bttExitActionPerformed
 
     /**
      * @param args the command line arguments
