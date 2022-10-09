@@ -257,6 +257,7 @@ public class EmployeeDAO {
                    tela.screenMenu_HistorySale.setVisible(false);
                    tela.setVisible(true);
                    tela.userConnected = rs.getString("Nome");
+                   JOptionPane.showMessageDialog(null, "Seu nível de acesso não permite visualizar todas as funções!");
                 }
             }
             else{

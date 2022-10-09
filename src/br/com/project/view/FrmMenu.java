@@ -174,6 +174,11 @@ public String userConnected;
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vendas.png"))); // NOI18N
         jMenu4.setText("Vendas");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
 
         screenMenu_openPDV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/352573_in_new_open_icon (1).png"))); // NOI18N
         screenMenu_openPDV.setText("Abrir PDV");
@@ -215,6 +220,11 @@ public String userConnected;
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4265055_door_exit_get_log_out_icon (1).png"))); // NOI18N
         jMenu8.setText("Sair");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu8);
 
         setJMenuBar(jMenuBar1);
@@ -244,7 +254,9 @@ public String userConnected;
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-    
+       FrmLogin screen = new FrmLogin();
+       this.dispose();
+       screen.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void screenMenu_HistorySaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenMenu_HistorySaleActionPerformed
@@ -282,6 +294,18 @@ public String userConnected;
        FrmProducts screenProduct1 = new FrmProducts();
        screenProduct1.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+       
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+    int op;
+     op =   JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+     if(op == 0){
+         System.exit(0);
+         }
+    }//GEN-LAST:event_jMenu8MouseClicked
 
     /**
      * @param args the command line arguments
