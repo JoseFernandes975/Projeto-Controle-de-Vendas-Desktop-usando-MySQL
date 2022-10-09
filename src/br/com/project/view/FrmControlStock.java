@@ -4,10 +4,13 @@ package br.com.project.view;
 import br.com.project.dao.ProductDAO;
 import br.com.project.model.Product;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmControlStock extends javax.swing.JFrame {
 
+    int id_product, qttAtt;
+    
     public void find(){
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.findAllProducts();
@@ -50,8 +53,8 @@ public class FrmControlStock extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        bttAddQtt = new javax.swing.JButton();
+        txtQuantityNew = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProducts = new javax.swing.JTable();
 
@@ -108,7 +111,12 @@ public class FrmControlStock extends javax.swing.JFrame {
 
         jLabel4.setText("QTD:");
 
-        jButton2.setText("Adicionar");
+        bttAddQtt.setText("Adicionar");
+        bttAddQtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttAddQttActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -128,10 +136,10 @@ public class FrmControlStock extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtQuantityNew, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(bttAddQtt)
                     .addComponent(bttSearch))
                 .addGap(62, 62, 62))
         );
@@ -148,8 +156,8 @@ public class FrmControlStock extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bttAddQtt)
+                    .addComponent(txtQuantityNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -225,8 +233,30 @@ public class FrmControlStock extends javax.swing.JFrame {
     }//GEN-LAST:event_bttSearchActionPerformed
 
     private void tableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMouseClicked
-       txtStock.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 3).toString());
+        id_product = Integer.parseInt(tableProducts.getValueAt(tableProducts.getSelectedRow(), 0).toString());
+        txtStock.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 3).toString());
+        txtDescription.setText(tableProducts.getValueAt(tableProducts.getSelectedRow(), 1).toString());
+      
     }//GEN-LAST:event_tableProductsMouseClicked
+
+    private void bttAddQttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttAddQttActionPerformed
+        try{
+            int qttStock, qttNew;
+            
+            ProductDAO dao = new ProductDAO();
+            
+            qttNew = Integer.parseInt(txtQuantityNew.getText());
+            qttStock = Integer.parseInt(txtStock.getText());
+            qttAtt = qttStock + qttNew;
+            
+            dao.updateStock(id_product, qttAtt);
+            
+            JOptionPane.showMessageDialog(null, "Estoque do produto atualizado!");
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }  
+    }//GEN-LAST:event_bttAddQttActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,8 +294,8 @@ public class FrmControlStock extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bttAddQtt;
     private javax.swing.JButton bttSearch;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,9 +303,9 @@ public class FrmControlStock extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tableProducts;
     private javax.swing.JTextField txtDescription;
+    private javax.swing.JTextField txtQuantityNew;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }
