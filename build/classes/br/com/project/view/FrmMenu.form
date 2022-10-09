@@ -135,6 +135,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Posi&#xe7;&#xe3;o do Dia"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="screenMenu_SaleDayActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>

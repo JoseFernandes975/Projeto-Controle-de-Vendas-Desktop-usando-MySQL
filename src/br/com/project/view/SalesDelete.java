@@ -39,7 +39,7 @@ public class SalesDelete extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         bttDeleteSale.setText("Deletar venda");
         bttDeleteSale.addActionListener(new java.awt.event.ActionListener() {

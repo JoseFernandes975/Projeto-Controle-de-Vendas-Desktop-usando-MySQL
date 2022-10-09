@@ -191,6 +191,11 @@ public String userConnected;
 
         screenMenu_SaleDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2682848_day_forecast_sun_sunny_weather_icon.png"))); // NOI18N
         screenMenu_SaleDay.setText("Posição do Dia");
+        screenMenu_SaleDay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenMenu_SaleDayActionPerformed(evt);
+            }
+        });
         jMenu4.add(screenMenu_SaleDay);
 
         screenMenu_HistorySale.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4781832_ago_clock_history_report_statistics_icon.png"))); // NOI18N
@@ -260,7 +265,8 @@ public String userConnected;
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void screenMenu_HistorySaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenMenu_HistorySaleActionPerformed
-        // TODO add your handling code here:
+       FrmSalesHistorys screen = new FrmSalesHistorys();
+       screen.setVisible(true);
     }//GEN-LAST:event_screenMenu_HistorySaleActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -306,6 +312,11 @@ public String userConnected;
          System.exit(0);
          }
     }//GEN-LAST:event_jMenu8MouseClicked
+
+    private void screenMenu_SaleDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenMenu_SaleDayActionPerformed
+        FrmTotalSalesByDate screen = new FrmTotalSalesByDate();
+        screen.setVisible(true);
+    }//GEN-LAST:event_screenMenu_SaleDayActionPerformed
 
     /**
      * @param args the command line arguments
