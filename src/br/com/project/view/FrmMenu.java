@@ -40,7 +40,7 @@ public String userConnected;
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        Product_ControlStock = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         screenMenu_openPDV = new javax.swing.JMenuItem();
@@ -147,19 +147,19 @@ public String userConnected;
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/produtos.png"))); // NOI18N
         jMenu6.setText("Produtos");
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/49590_boxes_customers_inventory_products_icon.png"))); // NOI18N
-        jMenuItem5.setText("Controle de Estoque");
-        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+        Product_ControlStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/49590_boxes_customers_inventory_products_icon.png"))); // NOI18N
+        Product_ControlStock.setText("Controle de Estoque");
+        Product_ControlStock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem5MouseClicked(evt);
+                Product_ControlStockMouseClicked(evt);
             }
         });
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        Product_ControlStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                Product_ControlStockActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem5);
+        jMenu6.add(Product_ControlStock);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/3018582_buy_cart_checkout_products_purchase_icon.png"))); // NOI18N
         jMenuItem6.setText("Consulta de Produtos");
@@ -281,15 +281,15 @@ public String userConnected;
        screen.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+    private void Product_ControlStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Product_ControlStockMouseClicked
         FrmProducts screenProducts = new FrmProducts();
        screenProducts.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5MouseClicked
+    }//GEN-LAST:event_Product_ControlStockMouseClicked
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        FrmProducts screenProducts = new FrmProducts();
-       screenProducts.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void Product_ControlStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Product_ControlStockActionPerformed
+        FrmControlStock screen = new FrmControlStock();
+        screen.setVisible(true);
+    }//GEN-LAST:event_Product_ControlStockActionPerformed
 
     private void screenMenu_openPDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenMenu_openPDVActionPerformed
        FrmSales screenSale = new FrmSales();
@@ -354,6 +354,7 @@ public String userConnected;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Product_ControlStock;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -366,7 +367,6 @@ public String userConnected;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;

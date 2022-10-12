@@ -1,7 +1,9 @@
 package br.com.project.dao;
 
 import br.com.project.JDBC.ConnectionFactory;
+import br.com.project.model.Employees;
 import br.com.project.model.Providers;
+import br.com.project.util.WebServiceCep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
@@ -202,6 +204,33 @@ public class ProviderDAO {
        return obj;
    }
    
+      public Providers buscaCep(String cep) {
+       
+        WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
+       
+
+        Providers obj = new Providers();
+
+        if (webServiceCep.wasSuccessful()) {
+            obj.setAddress(webServiceCep.getLogradouroFull());
+            obj.setCity(webServiceCep.getCidade());
+            obj.setNeighborhood(webServiceCep.getBairro());
+            obj.setUf(webServiceCep.getUf());
+            return obj;
+        } 
+        if(obj.getAddress() == null || obj.getNeighborhood() == null){
+            JOptionPane.showMessageDialog(null, "O Cep que digitou não tem endereço ou bairro!");
+               obj.setCity(webServiceCep.getCidade());
+              obj.setUf(webServiceCep.getUf());
+        return obj;
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
+            return null;
+        }
+
+    }
+    
    
 }
 

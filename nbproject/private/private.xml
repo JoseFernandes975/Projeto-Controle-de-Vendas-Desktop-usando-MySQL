@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmPayment.java</file>
-            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmSalesHistorys.java</file>
-            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmSaleDetail.java</file>
-            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/dao/ItemSaleDAO.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmLogin.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmClient.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmControlStock.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/dao/ClientDAO.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmMenu.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/dao/ProductDAO.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/view/FrmProducts.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/util/WebServiceCep.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/model/Client.java</file>
+            <file>file:/C:/Users/Bilad/Documents/NetBeansProjects/ProjectDataBase/src/br/com/project/dao/EmployeeDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,6 +6,7 @@ import br.com.project.model.Client;
 import br.com.project.model.Employees;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import br.com.project.util.WebServiceCep;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -350,7 +351,7 @@ public class FrmEmployees extends javax.swing.JFrame {
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -668,13 +669,16 @@ public class FrmEmployees extends javax.swing.JFrame {
     private void bttSaveEmployActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSaveEmployActionPerformed
 
             Employees obj =  new Employees();
+            
             obj.setName(txtName2.getText());
             obj.setRg(txtRg.getText());
             obj.setCpf(txtCpf.getText());
             obj.setEmail(txtEmail.getText());
+            
             obj.setPassword(txtPassword.getText());
             obj.setOffice(txtOffice.getText());
             obj.setAccessLevel(cbxAccessLevel.getSelectedItem().toString());
+            
             obj.setCell(txtCell.getText());
             obj.setTelephone(txtTelephone.getText());
             obj.setCep(txtCep.getText());
@@ -684,11 +688,11 @@ public class FrmEmployees extends javax.swing.JFrame {
             obj.setComplement(txtOffice.getText());
             obj.setNumber(Integer.parseInt(txtNumber.getText()));
             obj.setUf(cbxUf.getSelectedItem().toString());
-            obj.setId(Integer.parseInt(txtCode.getText()));
+           
             
             EmployeeDAO objDao = new EmployeeDAO();
             objDao.insertEmployee(obj);
-         
+            
             new br.com.project.util.Util().cleanPane(panelData);
  
     }//GEN-LAST:event_bttSaveEmployActionPerformed
@@ -790,31 +794,11 @@ public class FrmEmployees extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchNameActionPerformed
 
     private void bttSearchCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSearchCpfActionPerformed
-      /*  Client obj = new Client();
-        ClientDAO dao = new ClientDAO();
-        String cpf = txtCpf.getText();
-        
-        obj = dao.findByCpf(cpf);
-        
-        txtCode.setText(String.valueOf(obj.getId()));
-        txtNamee.setText(obj.getName());
-        txtRg.setText(obj.getRg());
-        txtCpf.setText(obj.getCpf());
-        txtEmail.setText(obj.getEmail());
-        txtTelephone.setText(obj.getTelephone());
-        txtCell.setText(obj.getCell());
-        txtCep.setText(obj.getCep());
-        txtAddress.setText(obj.getAddress());
-        txtNumber.setText(String.valueOf(obj.getNumber()));
-        txtOffice.setText(obj.getComplement());
-        txtNeighBorhood.setText(obj.getNeighborhood());
-        txtCity.setText(obj.getCity());
-        cbxUf.setSelectedItem(obj.getAddress());
-   */     
+    
     }//GEN-LAST:event_bttSearchCpfActionPerformed
  
     private void txtCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyPressed
-   /*   if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+      if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
          Employees obj =  new Employees();
          EmployeeDAO dao = new EmployeeDAO();
          obj = dao.buscaCep(txtCep.getText());
@@ -824,7 +808,7 @@ public class FrmEmployees extends javax.swing.JFrame {
          txtCity.setText(obj.getCity());
         cbxUf.setSelectedItem(obj.getUf());               
       }
-        */
+        
     }//GEN-LAST:event_txtCepKeyPressed
 
     private void txtComplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComplementActionPerformed
